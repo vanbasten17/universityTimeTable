@@ -16,8 +16,10 @@ import re
 
 dir_name = "/home/marc/Escriptori/HorariUni"
 directory = os.listdir(dir_name)
+year = '2018'
 scraper = Schedule_Scraper(directory)
 week_info = scraper.scrap_files()
+
 
 
 # Setup the Calendar API
@@ -32,18 +34,18 @@ service = build('calendar', 'v3', http=creds.authorize(Http()))
 # Call the Calendar API
 #now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
 for item in week_info:
-
+  start_time = str(year + '-' + item.month + '-' + item.day[:-1] + 'T' + item.start_time[:-1] + ":00" + '+02:00')
+  end_time = str(year + '-' + item.month + '-' + item.day[:-1] + 'T' + item.end_time +  ":00" + '+02:00')
   event = {
-    'summary': str(item),
-    'location': 'room',
-    'description': 'group',
+    'summary': str(item.course),
+    'location': str(item.room),
     'start': {
-      'dateTime': '2018-05-28T09:00:00-07:00',
+      'dateTime': start_time,
       'timeZone': 'Europe/Madrid',
     },
     'end': {
-      'dateTime': '2018-05-28T17:00:00-07:00',
+      'dateTime': end_time,
       'timeZone': 'Europe/Madrid',
     },
   }
-  #event = service.events().insert(calendarId='primary', body=event).execute()
+  event = service.events().insert(calendarId='primary', body=event).execute()
