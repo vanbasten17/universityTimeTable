@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://gestioacademica.upf.edu/pds/control/PubliHoraAlumCalendario?rnd=9583.0 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>&nbsp;&nbsp;</title>
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="/General/img/sty_upf/responsive/js/ie/html5shiv.js"></script>
+            <script src="/General/img/sty_upf/responsive/js/ie/respond.js"></script>
+        <![endif]-->        
+        <link rel="shortcut icon" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon16.png">
+        <link rel="apple-touch-icon" sizes="24x24" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon32.png">
+        <link rel="apple-touch-icon" sizes="32x32" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon32.png">
+        <link rel="apple-touch-icon" sizes="64x64" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon64.png">
+        <link rel="apple-touch-icon" sizes="110x110" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon114.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://gestioacademica.upf.edu/General/img/sty_upf/responsive/img/favicon114.png">        
+        <!-- Bootstrap -->
+        <link href="./PubliHoraAlumCalendario_files/bootstrap.min.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="avant/css/styles.css?=121">-->
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/style.css">
+        <link href="./PubliHoraAlumCalendario_files/font-sans.css" rel="stylesheet">
+        <link href="./PubliHoraAlumCalendario_files/font-awesome.min.css" rel="stylesheet">     
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/responsivePatch.css">
+        <link href="./PubliHoraAlumCalendario_files/jqueryui.min.css" rel="stylesheet">        
+        
+        
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/reset.css">       
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/apl.css">
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/botones.css">
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/flujo.css">
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/paginacion.css">
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/AccionesRegistro.css">        
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/tipsy.css">
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/pestanyas.css">      
+        <link rel="stylesheet" href="./PubliHoraAlumCalendario_files/multiselect.css">
+        <link type="text/css" rel="stylesheet" href="./PubliHoraAlumCalendario_files/jquery.multiselect.css">
+        <link type="text/css" rel="stylesheet" href="./PubliHoraAlumCalendario_files/jquery.multiselect.filter.css">        
+                   
+
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/jquery-1.10.2.min.js"></script>                
+        
+        <script type="text/javascript">
+            // Controlar el salto a Safari desde la aplicacion de escritorio con iPad.
+            if(("standalone" in window.navigator) && window.navigator.standalone){
+               var noddy, remotes = false;
+
+               document.addEventListener('click', function(event) {
+
+                  noddy = event.target;
+
+                  while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                     noddy = noddy.parentNode;
+                  }
+
+                  if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+                     event.preventDefault();
+                     var elem = noddy.target;    
+                     if (noddy.taget != null && noddy.target != '') {
+                        if (elem == window.name || elem == '_self') {
+                           window.location.href = noddy.href;
+                        } else {
+                           var elem = noddy.target;
+                           var prt = window.parent;
+                           while (prt.frames[elem] == null) {
+                              var prt2 = prt;
+                              prt = prt2.parent;
+                           }
+                           prt.frames[elem].location = noddy.href;
+                       }
+                    } else {
+                      document.location.href = noddy.href;
+                    }
+                 }
+              },false);
+            }
+            
+            var off = 1
+            function nolanzar() {
+                if (off != 1) {
+                    return false;
+                }
+                else {
+                    off++;
+                }
+                return true;
+            }
+
+            function lanzarUrlNaus(url) {
+                if (nolanzar() == true) {
+                document.location.href = url;
+                }
+            }
+
+            function prepararSalirSistema() {             
+                
+                            bootbox.dialog({ 
+                                message: 'If you want to exit all applications where you are logged in, press "Exit all". Otherwise, click "Quit" to Sign Out of the current system.',
+                                title: 'Exit',
+                                closeButton: false,
+                                onEscape: function () {                            
+                                        Delete_JSESSIONID();
+                                        window.close();                                
+                                },   
+                                buttons: {
+                                    main: {
+                                        label: 'Exit',
+                                        className: "btn-primary" ,
+                                        callback: function () {                                                                 
+                                               salirSistema();
+                                        }         
+                                    }                                    
+                                    ,
+                                    success: {
+                                        label: 'Exit All',
+                                        className: "btn-primary" ,
+                                        callback: function () {                                                                        
+                                                salirSistema("CAS");
+                                        }         
+                                    }
+                                }
+                             });
+                        
+                
+            }
+
+            
+
+            function Abrir(URL){
+                window.open(URL, '', 'resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes');
+            }
+            function AbrirMiPerfil()
+            {
+                window.open('miPerfil','','resizable=yes,toolbar=no ,status=yes,scrollbars=yes,menubar=no,width=900,height=850,top=80px,left=540px');
+            }
+
+            /************************** Botones Rango/NoRango *************************/
+            var locked = new Array(1);
+            var i = 0;
+            locked[i] = false;
+            lock = new Image(22, 13);
+            unlock = new Image(22, 13);
+
+            function swapImages(i, imag, from, to) {
+                if (locked[i] == true) {
+                    imag.className = "btnSinrango";
+                    imag.title = 'Bloquea la lista de selección para que tengan el mismo valor'
+                    locked[i] = false;
+                } else {
+                    to.value = from.value;
+                    imag.className = "btnRango";
+                    imag.title = 'Desbloquea la lista de selección para que tengan el mismo valor'
+                    locked[i] = true;
+                }
+            }
+
+            function swapImagesAsig(i, imag, from, to) {
+                swapImages(i, imag, from, to);
+                cambioAsig();
+            }
+
+            function lockCampoTexto(i, order, from, to) {
+                iFrom = from.value;
+                iTo = to.value;
+                if (locked[i] == true) {
+                    if (order == 0) {
+                        to.value = iFrom;
+                    } else {
+                        from.value = iTo;
+                    }
+                } else {
+                    if (isNaN(from.value)) {
+                        if (iFrom > to.value) {
+                            to.value = iFrom;
+                        }   
+                    } else {
+                        if (iFrom > parseInt(to.value)) {
+                            to.value = iFrom;
+                        }
+                    }
+                }
+            }
+
+            function lockCampoTextoAsig(i, order, from, to) {
+                lockCampoTexto(i, order, from, to);
+                cambioAsig();
+            }
+
+            function lockCombos(i, order, from, to) {
+                iFrom = from.selectedIndex;
+                iTo = to.selectedIndex;
+                if (locked[i] == true || iFrom > iTo) {
+                    if (order == 0) {
+                        to.selectedIndex = iFrom;
+                    } else {
+                        from.selectedIndex = iTo;
+                    }
+                }
+            }
+
+            function salirSistema(isCAS) {
+                if (isCAS != null) {
+                    document.location.href = "salirSistemaUninavsCAS";
+                } else {
+                document.location.href = "salirSistemaUninavs";
+                }
+            }
+
+          var t;
+          var timeout = 3600;
+          function resetTimer() {
+            clearTimeout(t);
+            t = setTimeout(logout, timeout * 1000);
+          }
+
+          document.onmousemove = resetTimer;
+          document.onkeypress = resetTimer;
+          
+          
+            function logout() {
+                var ahora = 0;
+                var ultimoAcceso = 0;
+                var zero = 0;
+            
+                var url = "/pds/control/ultimoAcceso";
+                jQuery.get(url, "", function(respuesta) {
+                                        ahora = respuesta.momento;
+                                        ultimoAcceso = respuesta.ultimoAcceso;
+                                        if (((ahora - ultimoAcceso) > (timeout*1000)) || (ultimoAcceso == 0 && ahora == 0)) {
+                                                clearTimeout(t);
+                                                window.onload = "";
+                                                document.onmousemove = "";
+                                                document.onkeypress = "";
+                                                bootbox.dialog({ 
+                                                    message: 'Your session has expired. You must authenticate again.',
+                                                    title: "Timeout",
+                                                    closeButton: false,
+                                                    onEscape: function () {                            
+                                                            Delete_JSESSIONID();
+                                                            window.close();                                
+                                                    },   
+                                                    buttons: {
+                                                        main: {
+                                                            label: 'Exit',
+                                                            className: "btn-primary" ,
+                                                            callback: function () {                            
+                                                                   Delete_JSESSIONID();
+                                                            
+                                                                        window.close();
+                                                            
+                                                            }         
+                                                        }
+                                                         
+                                                        ,
+                                                        success: {
+                                                            label: 'Exit All',
+                                                            className: "btn-primary" ,
+                                                            callback: function () {                            
+                                                                    Delete_JSESSIONID();
+                                                                    document.location='https://sso.upf.edu/CAS/index.php/logout';
+                                                            }         
+                                                        } 
+                                                                                         
+                                                    }
+                                                });
+                                        } else {
+                                                document.onmousemove = resetTimer;
+                                                document.onkeypress = resetTimer;
+                                        }
+                                    },
+                                    "json");
+            }            
+                 
+        function esconderMenu() {               
+            
+                $('body').addClass('collapse-leftbar');
+                $.cookie('admin_leftbar_collapse', 'collapse-leftbar');
+                $('ul.acc-menu:first ul.acc-menu').css('display', 'none');
+                $('ul.acc-menu:first ul.acc-menu').css('visibility', 'hidden');
+            
+        }
+            
+            // NOTIFICACIONES                   
+            
+            var urlNotificaciones = "/pds/control/";
+            $(document).ready(function() {   
+                
+    //            calcularNumNotificaciones();
+            });                   
+
+            $(document).on('click', '#nota-modal', function(){
+                var cl = $(this).attr("class");
+                if (cl.search('active') > 0) {
+                    var idNota = $(this).find('input[name="idNota"]').val();               
+                    var urlAjax = urlNotificaciones + "notificaciones/?idNota=" + idNota + "&accion=avisoLeido";
+                    guardarAvisos(urlAjax, 1);                
+                }
+                var l = $(this).find(".textAmagat02").html();          
+                if (l.length > 10) {
+                    $(this).find(".textAmagat02").slideToggle("slow");
+                    $(this).find(".textAmagat02").toggleClass("avisoEscondido");            
+                    $(this).siblings().find(".avisoEscondido").slideUp("slow");              
+                }
+                $(this).removeClass('active');
+            });
+
+
+    //        $('.notifications li a').click(function(e){
+    //            numNoti = numNoti - 1;
+    //            $('span.totalNot').html('Tienes <strong>' + numNoti + '</strong> avisos nuevos');
+    //            $('.toolbar .badge').text(numNoti);
+    //            $(this).removeClass('active');
+    //        });
+
+
+            $(document).on('click', '#modalAviso2 .eliminarAviso', function(event){
+                $(this).parent().fadeOut();
+                setTimeout(function(){
+                    $(this).parent().remove();
+                }, 1500);
+                event.stopPropagation();
+                var idNota = $(this).parent().find('input[name=idNota]').val();   
+                guardarAvisos(urlNotificaciones + "notificaciones/?idNota=" + idNota + "&accion=eliminarNotificacion", -1);            
+            });
+
+            $(document).on('click', '#notification-modal', function(event){
+                $(this).parent().fadeOut();
+                setTimeout(function(){
+                    $(this).parent().remove();
+                }, 1500);
+                event.stopPropagation();
+                var idNota = $(this).find('input[name="idNota"]').val();         
+                var urlAjax = urlNotificaciones + "notificaciones/?idNota=" + idNota + "&accion=avisoLeido";
+                guardarAvisos(urlAjax, -1); 
+                $('#notificaciones').addClass('open');
+            });
+
+
+            $(document).on('click', '#botonLeidosTodos01', function(){
+                $('.toolbar .badge').hide();
+                $('#botonLeidosTodos01').hide();
+                $('.scrollthis').empty();
+                $('.scrollthis').height(0);
+                $('span.totalNot').text('');
+                $('#botonLeidosTodos01').hide();
+                $('#botonLeidosTodos02').hide();  
+                var urlAjax = urlNotificaciones + "notificaciones/?accion=todosAvisosLeidos";
+                todosLeidos(urlAjax, 2);
+            });
+
+            $(document).on('click', '#botonLeidosTodos02',function(){
+                $('#modalAviso2 .badge').text("0");
+                $('#modalAviso2 .list-group-item').removeClass('active');
+                $('.scrollthis').empty();
+                $('.scrollthis').height(0);
+                $('span.totalNot').text('');
+                $('.toolbar .badge').hide();    
+                $('#botonLeidosTodos01').hide();
+                $('#botonLeidosTodos02').hide();
+
+
+                var urlAjax = urlNotificaciones + "notificaciones/?accion=todosAvisosLeidos";
+                todosLeidos(urlAjax, 2);            
+            });
+
+
+            $(document).on('click', '.hasnotifications', function(e) {
+                var a = $('#notificaciones').attr("class");
+                if (a.search('open') < 0) {
+                    cargarListas(urlNotificaciones + "notificaciones/?accion=cargarNotificaciones");            
+                }
+    //            calcularNumNotificaciones();            
+            });
+
+            function guardarAvisos(url, modal) {
+                jQuery.ajax({
+                    url: url,
+                    success: function(data) {
+                        var result = "", result2 = "";    
+                        if (modal < 0) {
+                            for (f=0;f<data.length;f++) {                           
+                                result = result + montarModalAvisos(data[f]);
+                                result2 = result2 + montarModal2Avisos(data[f]);                            
+                            }                                                           
+                            $("#modalAviso2 div .list-group").empty();                        
+                            $("#modalAviso2 div .list-group").html(result2);                        
+                            var tamany2 = $(".modal-body .active").length;                                       
+                            $("#modalAviso2 .badge").html(tamany2);    
+                            if (tamany2 > 0) {
+                                $('#botonLeidosTodos02').show();                            
+                            } else {
+                                $('#botonLeidosTodos02').hide();                            
+                            }                        
+                        
+                            $('.scrollthis').empty(); 
+                            if (result != null && result != "") {
+                                $('.scrollthis').height(200);
+                                $('.scrollthis').html(result);                                                 
+                            } else {
+                                $('.scrollthis').empty();
+                                $('.scrollthis').height(0);
+                                $('.scrollthis').html(result);
+                            }
+                            var occ = result.match(/notification-success/g);
+                            var tamany = 0;
+                            if (occ != null) {
+                                tamany = occ.length;                          
+                            }
+                        
+                            $('span.totalNot').html('You have <strong>' + tamany + '</strong> new notices');                        
+                            if (tamany > 0) {
+                                $(".hasnotifications .badge").show();    
+                                $(".hasnotifications .badge").html(tamany);                         
+                                $('#botonLeidosTodos01').show();                            
+                            } else {
+                                $(".hasnotifications .badge").hide();
+                                $('#botonLeidosTodos01').hide(); 
+                            }
+
+                        } else if (modal == 1) {
+                            for (f=0;f<data.length;f++) {                                 
+                                result = result + montarModalAvisos(data[f]);                            
+                            }                                                                           
+                            $("div .scrollthis").empty();
+                            if (result != null && result != "") {
+                                $('.scrollthis').height(200);
+                                $('.scrollthis').html(result);                                                 
+                            } else {
+                                $('.scrollthis').empty();
+                                $('.scrollthis').height(0);
+                                $('.scrollthis').html(result);
+                            }
+                            var occ = result.match(/notification-success/g);
+                            var tamany = 0;
+                            if (occ != null && occ != "") {
+                                tamany = occ.length;                            
+                            }                            
+                            $('span.totalNot').html('You have <strong>' + tamany + '</strong> new notices');                        
+                                       
+                            if (tamany > 0) {
+                                $('.toolbar .badge').show();
+                                $('.toolbar .badge').text(tamany);  
+                                $('#botonLeidosTodos01').show();
+                            } else {
+                                $('.toolbar .badge').hide();
+                                $('#botonLeidosTodos01').show(); 
+                            }    
+                            $("#modalAviso2 .badge").html(tamany);
+                            $(".hasnotifications .badge").html(tamany);
+
+                        } else if (modal == 2) {
+                            for (f=0;f<data.length;f++) {                           
+                                result = result + montarModal2Avisos(data[f]);                            
+                            }   
+                            
+                            $("#modalAviso2 div .list-group").empty();                        
+                            $("#modalAviso2 div .list-group").html(result);                        
+                            var tamany = $(".modal-body .active").length;                                       
+                            $("#modalAviso2 .badge").html(tamany2);    
+                            if (tamany > 0) {
+                                $('.toolbar .badge').show();    
+                                $('.toolbar .badge').text(tamany);                                  
+                                $('#botonLeidosTodos02').show();                            
+                                $(".hasnotifications .badge").html(tamany);                        
+                            } else {
+                                $('.toolbar .badge').hide();
+                                $('#botonLeidosTodos02').hide();                            
+                            }                                                                                                                
+                        }
+                    }                                 
+              });
+            }
+
+            function todosLeidos(url, modal) {
+                jQuery.ajax({
+                    url: url,
+                    success: function(data) {
+                        var result2 = "";                                                  
+                        for (f=0;f<data.length;f++) {
+                            result2 = result2 + montarModal2Avisos(data[f]);
+                        }                    
+                        $("div .list-group").html(result2);                  
+                        var tamany = $(".modal-body .active").length;
+                        $("#modalAviso2 .badge").html(tamany);                      
+                    }                    
+                });
+            }        
+
+            function cargarModalLista1(url) {
+                jQuery.ajax({
+                    url: url,
+                    success: function(data) {
+                        var resultModal = "";               
+                        for (f=0;f<data.length;f++) {
+                            resultModal = resultModal + montarModalAvisos(data[f]);
+                        }                                          
+                        $('.scrollthis').empty(); 
+                        if (resultModal != null && resultModal != "") {
+                            $('.scrollthis').height(200);
+                            $('.scrollthis').html(resultModal);                                         
+                        } else {
+                            $('.scrollthis').empty();
+                            $('.scrollthis').html(resultModal);
+                        }
+                        var occ = resultModal.match(/notification-success/g);
+                        var tamany = 0;
+                        if (occ != null) {
+                            tamany = occ.length;                          
+                        }
+                        
+                        $(".totalNot").html('You have <strong>' + tamany + '</strong> new notices'); 
+                        if (tamany > 0) {                            
+                            $(".hasnotifications .badge").show();    
+                            $(".hasnotifications .badge").html(tamany);   
+                            $('#botonLeidosTodos01').show();   
+                        } else {
+                            $(".hasnotifications .badge").hide();
+                            $('#botonLeidosTodos01').show(); 
+                        }                       
+
+                    }                    
+                });            
+            }
+                        
+            function cargarListas(url) {
+                jQuery.ajax({
+                    url: url,
+                    success: function(data) {
+                        var resultModal = "";
+                        var resultModal2 = "";                    
+                        for (f=0;f<data.length;f++) {
+                            resultModal = resultModal + montarModalAvisos(data[f]);
+                            resultModal2 = resultModal2 + montarModal2Avisos(data[f]);
+                        }              
+                        $("#modalAviso2 div .list-group").empty();                        
+                        $("#modalAviso2 div .list-group").html(resultModal2);                        
+                        var tamany2 = $(".modal-body .active").length;                                       
+                        $("#modalAviso2 .badge").html(tamany2);    
+                        if (tamany2 > 0) {
+                            $('#botonLeidosTodos02').show();                            
+                        } else {
+                            $('#botonLeidosTodos02').hide();                            
+                        }                        
+                        
+                        $('.scrollthis').empty(); 
+                        if (resultModal != null && resultModal != "") {
+                            $('.scrollthis').height(200);
+                            $('.scrollthis').html(resultModal);                                                 
+                        } else {
+                            $('.scrollthis').empty();
+                            $('.scrollthis').height(0);
+                            $('.scrollthis').html(resultModal);
+                        }
+                        var occ = resultModal.match(/notification-success/g);
+                        var tamany = 0;
+                        if (occ != null) {
+                            tamany = occ.length;                          
+                        }
+                        
+                        $(".totalNot").html('You have <strong>' + tamany + '</strong> new notices'); 
+                        if (tamany > 0) {
+                            $(".hasnotifications .badge").show();    
+                            $(".hasnotifications .badge").html(tamany);                         
+                            $('#botonLeidosTodos01').show();                            
+                        } else {
+                            $(".hasnotifications .badge").hide();
+                            $('#botonLeidosTodos01').hide(); 
+                        }
+
+
+                    }                    
+                });            
+            }
+
+            function leerNotaJS () {
+                       // $(this).find(".textAmagat02").slideToggle("slow");
+                //$(this).find(".textAmagat02").toggleClass("avisoEscondido");
+                $(this).removeClass('active');
+                //$(this).siblings().find(".avisoEscondido").slideUp("slow");
+                var idNota = $(this).find('input[name="idNota"]').val();      
+                var urlAjax = "/cosmos/Controlador/?logica=com.sigma.uninavs.notificaciones.SGGestorNotificaciones&idNota=" + idNota + "&idNav=avisoLeido&apl=Uninavs";
+                guardarAvisos(urlAjax, -1);
+
+            }
+
+            function montarModalAvisos(nota) {
+                var modal = "";
+                if (nota.indlectura !="S" && nota.indlectura != "s") {
+                    modal = modal + "<li><a href=\"#\" id=\"notification-modal\" data-toggle=\"modal\" data-target=\"#modalAviso\" class=\"notification-success active\">\n";
+
+                    modal = modal + "<span class=\"time\">" + nota.fecha.substring(0,16) + "</span>";
+                    modal = modal + "<i class=\"fa fa-bookmark text-success\"></i><span class=\"msg\">" + nota.titulo + "</span>";
+                    modal = modal + "<input type=\"hidden\" name=\"idNota\" value=\"" + nota.id + "\" />";
+                    modal = modal + "</a></li>";      
+                }
+
+                return modal;
+            }        
+
+            function montarModal2Avisos(nota) {            
+                var modal = "";
+                if (nota.indlectura=="S" || nota.indlectura == "s") {
+                    modal = modal + "<a class=\"list-group-item\" id=\"nota-modal\" href=\"#\">";
+                } else {
+                    modal = modal + "<a class=\"list-group-item active\" id=\"nota-modal\"  href=\"#\">";
+                }
+
+                var cuerpo = nota.cuerpo;
+                var cuerpoCorto = cuerpo;
+                var cuerpoLargo = "";
+                if (cuerpo != null) {
+                    var lng = cuerpo.length;
+                    if (lng > 128) {
+                        cuerpoCorto = cuerpo.substring(0,128);
+                        var indx = cuerpoCorto.lastIndexOf(" ");
+                        if (indx > 0) {
+                            cuerpoCorto = cuerpo.substring(0, indx);
+                            cuerpoLargo = cuerpo.substring(indx, cuerpo.length-1);
+                        }
+                    }
+                }
+
+                modal = modal + "<i class=\"fa fa-trash eliminarAviso\" title=\"Remove notice\"></i><h4 class=\"list-group-item-heading\">";
+                modal = modal + "<i class=\"fa fa-bookmark text-success\"></i> &nbsp;" + nota.titulo +  "</h4>";            
+                modal = modal + "<h5 class=\"horaEnvio\">" + nota.fecha.substring(0,16) + "</h5><p class=\"list-group-item-text textAmagat01\">" + cuerpoCorto + "</p>"            
+                modal = modal + "<i id=\"loading\" class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom\" style=\"display:none;\"></i>"
+                modal = modal + "<input type=\"hidden\" name=\"idNota\" value=\"" + nota.id + "\"></input>";
+                modal = modal + "<div  class=\"textAmagat02\"  style=\"display:none;\"><p>" + cuerpoLargo + "</p></div>";
+    //                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at mi vitae est ultrices facilisis et id lectus. Ut non elementum ante. Sed dui lorem, tempor eu lobortis sit amet, imperdiet auctor tortor. Ut vehicula lacus turpis, a vehicula urna consequat at. Nunc euismod, elit et varius maximus, lectus velit molestie nisi, a lobortis nulla arcu a turpis. Mauris gravida urna leo, ut luctus elit porta id. Praesent finibus efficitur imperdiet.  </p><p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at mi vitae est ultrices facilisis et id lectus. Ut non elementum ante. Sed dui lorem, tempor eu lobortis sit amet, imperdiet auctor tortor. Ut vehicula lacus turpis, a vehicula urna consequat at. Nunc euismod, elit et varius maximus, lectus velit molestie nisi, a lobortis nulla arcu a turpis. Mauris gravida urna leo, ut luctus elit porta id. Praesent finibus efficitur imperdiet.  </p> <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at mi vitae est ultrices facilisis et id lectus. Ut non elementum ante. Sed dui lorem, tempor eu lobortis sit amet, imperdiet auctor tortor. Ut vehicula lacus turpis, a vehicula urna consequat at. Nunc euismod, elit et varius maximus, lectus velit molestie nisi, a lobortis nulla arcu a turpis. Mauris gravida urna leo, ut luctus elit porta id. Praesent finibus efficitur imperdiet.  </p>  </div>                       
+                modal = modal + "</a>";      
+
+                return modal;
+
+            }
+        
+        </script>
+        
+        
+    </head>
+
+    <body class="notranslate collapse-leftbar" onload="esconderMenu();mostrarMensajeUninavsResp(&#39;null&#39;, &#39;Accept&#39;);" id="pantallaCalendari" style="">
+
+        
+    <div class="modal fade" id="acercaDe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            
+
+
+
+
+
+
+
+
+
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">About</h4>
+    </div>
+    
+    
+    <div class="notranslate modal-body">
+        <div class="row"> 
+            <div class="col-md-12">
+                
+                    <h1 class="text-center">PDS - 13.2</h1><br><br>
+                
+
+                <p class="text-center"> <strong> © SIGMA AIE - Helping universities succeed </strong></p><br>
+                <p class="text-justify">SIGMA AIE y demás denominaciones de productos, servicios, gráficos y logotipos de SIGMA AIE son marcas protegidas por SIGMA AIE. Las denominaciones de otros productos, servicios y compañías mencionadas en este documento pueden ser marcas registradas de sus respectivos propietarios</p>
+                <p class="text-center"><a href="http://www.gestionuniversitariasigma.com/index.php/es/aviso-legal" target="_blank">Más información</a></p>
+            </div> 
+        </div> 
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+    </div>
+</div>
+
+
+        </div>
+    </div>  
+        
+    <div id="headerbar" style="position: fixed;">
+        <div class="container">
+            <div class="row ">
+                <h4 id="titol" class="pull-left" title="" data-original-title="">Applications</h4><div id="buttonDropDown" class="pull-right">  <button class="btn btn-inverse-alt hidden-print" title="Cerrar menú de aplicaciones"><i class="fa fa-level-up fa-2x"></i></button></div></div>
+            <div class="row">
+                <div class="col-md-3">
+<a class="shortcut-tiles tiles-sky" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=0&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=ACCS"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Registration in upf studies</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-orange" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=N&amp;idNav=opcionesMenu&amp;idUrl=1&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=EXPS"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Transcript</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-brown" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=N&amp;idNav=opcionesMenu&amp;idUrl=2&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=MATS"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Enrolment</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-midnightblue" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=N&amp;idNav=opcionesMenu&amp;idUrl=3&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=PUBLI"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Class schedules</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-success" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=4&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TAS"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Fees</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-indigo perfiles" href="https://gestioacademica.upf.edu/pds/control/PubliHoraAlumCalendario?rnd=9583.0#" tabindex="0" data-container="#headerbar" data-toggle="popover" data-trigger="click" data-html="true" data-animation="true" data-placement="auto bottom" data-content="&lt;div class=&quot;panel-group accordion&quot;&gt;&lt;div class=&quot;panel panel-default &quot;&gt;&lt;div class=&quot;panel-heading&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;.accordion&quot; href=&quot;#collapseALUTC&quot;&gt;&lt;h4 class=&quot;panel-title&quot;&gt;
+&lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt;    Available options&lt;/h4&gt;&lt;i class=&quot;fa fa-chevron-right desplegable&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div id=&quot;collapseALUTC&quot; class=&quot;list-group panel-collapse collapse collapsing&quot;&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=5&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;Move on!&lt;/p&gt;&lt;/a&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=6&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;Introduction to Mathematics&lt;/p&gt;&lt;/a&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=7&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;Specialist teaching LSC&lt;/p&gt;&lt;/a&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=8&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;UPF Languages&lt;/p&gt;&lt;/a&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=9&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;Internat. Study Abroad Program&lt;/p&gt;&lt;/a&gt;&lt;a class=&quot;list-group-item&quot; href=&quot;opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=10&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCS&quot;&gt;&lt;p&gt;Summer Term&lt;/p&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" data-original-title="" title=""><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Courses and  language upf</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-green" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=11&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TCSO"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Doctoral thesis follow-up</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-magenta" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=12&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TFEPE"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Final studies project</div></a></div><div class="col-md-3">
+<a class="shortcut-tiles tiles-sky" href="https://gestioacademica.upf.edu/pds/control/opcionMenu?esServicio=S&amp;idNav=opcionesMenu&amp;idUrl=13&amp;DirectorioListados=/data/SaaS/UPF/Explotacion/sigma/Listados/&amp;dirLog=${config.sigma.instanceRoot}/logs/&amp;apl=Uninavs&amp;idAplicacion=TIS"><div class="tiles-body"><div class="pull-left">&nbsp;</div></div><div class="tiles-footer">Degree certificate</div></a></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+        
+       
+        <a id="leftmenu-trigger" title="" class="tooltips" data-toggle="tooltip" data-placement="bottom" data-original-title="Main Menu"><i class="fa fa-align-left"></i></a>
+        
+        
+        <!-- Boton 1. Mis aplicaciones -->
+         
+        
+        
+                <a id="headerbardropdown" title="" class="tooltips" data-toggle="tooltip" data-placement="bottom" data-original-title="Aplications"><i class="fa fa-th"></i></a>
+            
+            <div class="navbar-header pull-left">     
+                <a class="navbar-brand tooltips" href="javascript:lanzarUrlNaus(&#39;aplicacionesResponsive&#39;)" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Home"></a>
+            </div>
+        
+
+        <ul class="nav navbar-nav pull-right toolbar">
+<!--            <li class="dropdown">
+                <a href="#" class="dropdown-toggle tooltips" data-toggle='dropdown'><i class="fa fa-globe"></i></a>
+                <ul class="dropdown-menu dropdown-menu-right userinfo arrow" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Castellano</a></li>
+                    <li role="presentation" class="active"><a role="menuitem" tabindex="-1" href="#">Català</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">English</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Euskera</a></li>
+                </ul>
+            </li>
+-->
+            
+            <li class="dropdown">
+                <a href="https://gestioacademica.upf.edu/pds/control/PubliHoraAlumCalendario?rnd=9583.0#" class="dropdown-toggle username tooltips" data-toggle="dropdown" data-placement="bottom" title="" data-original-title="My profile">
+                    <span class="hidden-xs">MARC RABAT PLA<i class="fa fa-caret-down"></i></span>
+                                        
+                        <img src="./PubliHoraAlumCalendario_files/@a6f33d389fef69b9869205f58c748d8b">
+
+                    
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right userinfo arrow" role="menu" aria-labelledby="dropdownMenu1">
+                    <li class="username">                        
+                          
+                            <div class="pull-left"><img src="./PubliHoraAlumCalendario_files/@a6f33d389fef69b9869205f58c748d8b">
+</div>
+                            <div class="pull-right"><h5>Hello !</h5><!--<small>Logged in as <span>john2751212121</span></small>--></div>
+                        
+                    </li>
+                    <li class="userlinks">
+                        <ul class="dropdown-menu">
+                            
+                                    
+                                        <li class="first">
+                                    
+                                        <a href="javascript:void(0);" class=" tooltips" onclick="AbrirMiPerfil()" title="" data-original-title="My profile">My profile<i class="pull-right fa fa-user"></i></a>
+                                    </li>
+                                                        
+                            <li class="hidden"><a href="https://gestioacademica.upf.edu/pds/control/PubliHoraAlumCalendario?rnd=9583.0#" class=" tooltips" title="" data-original-title="Settings">Settings <i class="pull-right fa fa-cog"></i></a></li>
+                            
+                                <li><a href="https://gestioacademica.upf.edu/pds/control/PubliHoraAlumCalendario?rnd=9583.0#" data-toggle="modal" data-target="#acercaDe" class=" tooltips" title="" data-original-title="About">About <i class="pull-right fa fa-info-circle"></i></a></li>
+                            
+                            
+                                 
+
+                            <li class="divider"></li>
+                            <li id="desconnectar"><a href="javascript:void(0);" onclick="javascript:prepararSalirSistema();" target="_top" class=" tooltips" title="" data-original-title="Exit">Exit &nbsp;&nbsp; <i class="pull-right fa fa-power-off "></i></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Notificaciones -->
+            
+            <!-- FI Notificaciones -->
+            
+            
+                                
+            <!-- li class="decreaseFont" style="margin-left:-22px">
+                <a class=" tooltips" title="Decrease font size" data-placement="bottom"><i class="fa fa-minus-circle "></i></a>
+            </li>
+            <li class="resetFont" style="margin-left:-20px;">
+                <a class=" tooltips" title="Reset font size" data-placement="bottom"><i class="fa fa-font "></i></a>
+            </li>
+            <li class="increaseFont" style="margin-left:50px;">
+                <a class=" tooltips" title="Increase font size" data-placement="bottom"><i class="fa fa-plus-circle "></i></a>
+            </li -->               
+        </ul>
+                    
+    </header>
+
+    <div id="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <nav id="page-leftbar" role="navigation">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="acc-menu" id="sidebar" style="top: 40px;">
+                <!--<li id="search">
+                    <a href="javascript:;"><i class="fa fa-search opacity-control"></i></a>
+                     <form>
+                        <input type="text" class="search-query" placeholder="Search...">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </li>-->
+                
+                    <li><a href="javascript:lanzarUrlNaus(&#39;aplicacionesResponsive&#39;)"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li class="divider"></li>  
+                                     
+                    <li class="active"><a href="https://gestioacademica.upf.edu/pds/control/PubliHoraAlum?useCase=PubliHoraAlum&amp;modulo=PDS&amp;nemoMenu=ALUM1&amp;nemoOpc=ALU25&amp;apl=Uninavs&amp;ocurrenciaNum=1"><span>Schedules</span></a></li>
+                <!--<li><a href="javascript:;"><i class="fa fa-caret-square-o-right"></i> <span>Consulta d'expedient</span> </a></li>-->
+                <li class="divider"></li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </nav>
+
+            
+            <!-- END RIGHTBAR -->
+        
+        <div id="page-content" style="min-height: 564px;">
+            <div id="wrap">
+                <div id="page-heading">
+                    <ol class="breadcrumb">
+                        <li><span>Class schedules</span></li>
+                        <li class="active">Schedules</li>
+                        <li class="perfilClave pull-right" title="Perfil - Clave">                           
+                                                        
+                                                                         
+                        </li>                        
+                    </ol>
+                </div>
+                <div class="container">
+                    <div id="htmlBody">
+                        
+
+<title>&nbsp;</title>
+
+
+
+
+
+
+<script type="text/javascript">
+    function mostrarEspereBoostrap(literal, estado) {
+        estado = estado == undefined ? "show" : estado;
+        jQuery("#mostrarEspereBS").modal(estado).find(".modal-body h3").text(literal);
+        return jQuery("#mostrarEspereBS");
+    }
+</script>
+<div class="modal fade" id="mostrarEspereBS" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-vertical-centered ">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align:center">
+                <h3>Processing your request</h3>
+                <br>
+                <i id="icono" class="fa  fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="./PubliHoraAlumCalendario_files/fullcalendar.css" rel="stylesheet">
+
+<!--Full Calendar Print CSS -->
+<link href="./PubliHoraAlumCalendario_files/print.css" type="text/css" rel="none" id="printStyle">
+
+<!-- Full Calendar JS  -->
+<script src="./PubliHoraAlumCalendario_files/fullcalendar.min.js"></script>
+
+
+<!-- Print-->
+<script src="./PubliHoraAlumCalendario_files/html2canvas.js"></script>
+
+
+<link rel="stylesheet" href="./PubliHoraAlumCalendario_files/custom.css">
+<link rel="stylesheet" href="./PubliHoraAlumCalendario_files/customNaus.css">
+
+<div class="panel panel-default calendari">
+    <div id="botonsUp">
+
+        <script type="text/javascript">
+            //no podemos hacer un href a pelo del window porque está integrado con moodle y sino nos lo cargamos
+            function accionVolver(){
+            
+
+                              document.forms.volver.action='PubliHoraAlum';
+                              document.forms.volver.submit();
+                          }
+        </script>
+        <form name="volver" method="post" controlsubmit="true">
+        </form>
+
+                <a onclick="javascript:accionVolver();" target="_top" class="btn btn-sm btn-default" title="Return"><i class="fa fa-reply"></i> Return</a>
+
+        <a id="imprimir" class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i> Print</a>
+
+        
+
+        
+        
+
+        <div class="alert alert-danger" role="alert" id="error-icalc" style="margin: 10px auto;"></div>
+    </div>
+    <div id="container">
+        <div id="info">
+            <div id="titols">
+                <span id="titol">
+                    <h2>
+                        Schedule&nbsp;
+                        Third Quarter
+                    </h2>
+                </span>
+            </div>
+        </div>
+        <div class="alert alert-info" role="alert" id="alertaClicable">You can click on each of the sessions so that your details are displayed.</div>
+        <div class="alert alert-info" role="alert" id="alertaTextoSemanal" style="display: none"></div>
+        
+        
+        <div class="alert alert-info" role="alert" id="alertaTextoExam">Exam schedules may be modified depending on the evaluation system of the course's syllabus or due to any other justified reason.</div>
+        
+        <div class="alert alert-danger" role="alert" id="error" style="display: none;"></div>
+
+        <div id="calendar" class="fc fc-ltr ui-widget"><table class="fc-header" style="width:100%"><tbody><tr><td class="fc-header-left"><span class="fc-button fc-button-prev ui-state-default ui-corner-left" unselectable="on" style="visibility: hidden;"><span class="fc-icon-wrap"><span class="ui-icon ui-icon-circle-triangle-w"></span></span></span><span class="fc-button fc-button-next ui-state-default ui-corner-right" unselectable="on"><span class="fc-icon-wrap"><span class="ui-icon ui-icon-circle-triangle-e"></span></span></span><select id="comboMesesAnyos" name="comboMesesAnyos" onchange="irAFecha()"><option value="4/2018">April/2018</option><option value="5/2018">May/2018</option><option value="6/2018">June/2018</option></select></td><td class="fc-header-center"><span class="fc-header-title"><h2> 09   — 14 April 2018</h2></span></td><td class="fc-header-right"><span class="fc-button fc-button-today ui-state-default ui-corner-left ui-state-disabled" unselectable="on">Today</span><span class="fc-button fc-button-agendaDay ui-state-default" unselectable="on">Day</span><span class="fc-button fc-button-agendaWeek ui-state-default ui-corner-right ui-state-active" unselectable="on">Week</span></td></tr></tbody></table><div class="fc-content" style="position: relative;"><div class="floatThead-wrapper" style="position: relative; clear: both;"><div aria-hidden="true" class="floatThead-container" style="overflow: hidden; padding-left: 0px; padding-right: 0px; position: absolute; margin-top: 0px; top: 0px; z-index: 1001; will-change: transform; transform: translateX(0px) translateY(0px); left: 0px; width: 1063px;"><table class="fc-agenda-days fc-border-separate floatThead-table" cellspacing="0" style="border-collapse: separate; border: 0px none rgb(128, 128, 128); display: table; margin: 0px; table-layout: fixed; width: 100%;"><colgroup><col style="width: 60px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 168px;"></colgroup><thead><tr class="fc-first fc-last"><th class="fc-agenda-axis fc-week-number ui-widget-header fc-first" style="width: 50px;">Week 1</th><th class="fc-mon fc-col0 ui-widget-header" style="width: 167px;">Monday 9</th><th class="fc-tue fc-col1 ui-widget-header" style="width: 166px;">Tuesday 10</th><th class="fc-wed fc-col2 ui-widget-header" style="width: 166px;">Wednesday 11</th><th class="fc-thu fc-col3 ui-widget-header" style="width: 166px;">Thursday 12</th><th class="fc-fri fc-col4 ui-widget-header" style="width: 166px;">Friday 13</th><th class="fc-sat fc-col5 ui-widget-header fc-last">Saturday 14</th><th class="fc-agenda-gutter ui-widget-header fc-last" style="display: none;">&nbsp;</th></tr></thead></table></div><div class="fc-view fc-view-agendaWeek fc-agenda" style="position: relative; height: 750px; overflow-y: auto;" unselectable="on"><div style="position: absolute; z-index: 2; left: 0px; width: 100%; top: 16px;"><div style="position: absolute; width: 100%; overflow-x: hidden; overflow-y: auto; height: 1511px;"><div style="position:relative;width:100%;overflow:hidden"><div class="fc-event-container" style="position:absolute;z-index:8;top:0;left:0"><div class="fc-event fc-event-vert fc-event-start fc-event-end assig01" style="position: absolute; top: 0px; left: 62px; width: 156.925px; height: 249px;"><div class="fc-event-inner"><div class="fc-event-time">08:30 - 10:30</div><div class="fc-event-title"><p>21448 - Automatic Learning and Data Mining<br>Group 1 - Theory<br>Classrooms 52.221</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig03" style="position: absolute; top: 755px; left: 62px; width: 156.925px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">14:30 - 16:30</div><div class="fc-event-title"><p>21433 - Software Engineering for Web Applications<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig04" style="position: absolute; top: 0px; left: 230px; width: 155.95px; height: 249px;"><div class="fc-event-inner"><div class="fc-event-time">08:30 - 10:30</div><div class="fc-event-title"><p>21474 - Security Strategies in Networks and Services<br>Group 1 - Theory<br>Classrooms 52.121</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig02" style="position: absolute; top: 755px; left: 230px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">14:30 - 16:30</div><div class="fc-event-title"><p>21434 - Projects Based on Open Source Software<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig03" style="position: absolute; top: 1007px; left: 230px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">16:30 - 18:30</div><div class="fc-event-title"><p>21433 - Software Engineering for Web Applications<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig01" style="position: absolute; top: 251px; left: 397px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">10:30 - 12:30</div><div class="fc-event-title"><p>21448 - Automatic Learning and Data Mining<br>Group 1 - Theory<br>Classrooms 52.119</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig05" style="position: absolute; top: 755px; left: 397px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">14:30 - 16:30</div><div class="fc-event-title"><p>21445 - Synthetic Image<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig04" style="position: absolute; top: 503px; left: 564px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">12:30 - 14:30</div><div class="fc-event-title"><p>21474 - Security Strategies in Networks and Services<br>Group 1 - Theory<br>Classrooms 52.321</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig02" style="position: absolute; top: 1007px; left: 564px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">16:30 - 18:30</div><div class="fc-event-title"><p>21434 - Projects Based on Open Source Software<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig03" style="position: absolute; top: 1259px; left: 564px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">18:30 - 20:30</div><div class="fc-event-title"><p>21433 - Software Engineering for Web Applications<br>Group 1 - Theory<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig01" style="position: absolute; top: 503px; left: 731px; width: 155.95px; height: 250px;"><div class="fc-event-inner"><div class="fc-event-time">12:30 - 14:30</div><div class="fc-event-title"><p>21448 - Automatic Learning and Data Mining<br>Group 1 - Theory<br>Classrooms 52.221</p></div></div><div class="fc-event-bg"></div></div><div class="fc-event fc-event-vert fc-event-start fc-event-end assig05" style="position: absolute; top: 1007px; left: 731px; width: 155.95px; height: 124px;"><div class="fc-event-inner"><div class="fc-event-time">16:30 - 17:30</div><div class="fc-event-title"><p>21445 - Synthetic Image<br>Group 101 - Practice<br>Classrooms 54.003</p></div></div><div class="fc-event-bg"></div></div></div><table class="fc-agenda-slots" style="width:100%" cellspacing="0"><tbody><tr class="fc-slot0 fc-minor"><th class="fc-agenda-axis ui-widget-header" style="width: 50px;">08:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot1 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot2 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot3 "><th class="fc-agenda-axis ui-widget-header">09:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot4 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot5 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot6 fc-minor"><th class="fc-agenda-axis ui-widget-header">09:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot7 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot8 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot9 "><th class="fc-agenda-axis ui-widget-header">10:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot10 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot11 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot12 fc-minor"><th class="fc-agenda-axis ui-widget-header">10:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot13 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot14 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot15 "><th class="fc-agenda-axis ui-widget-header">11:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot16 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot17 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot18 fc-minor"><th class="fc-agenda-axis ui-widget-header">11:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot19 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot20 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot21 "><th class="fc-agenda-axis ui-widget-header">12:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot22 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot23 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot24 fc-minor"><th class="fc-agenda-axis ui-widget-header">12:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot25 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot26 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot27 "><th class="fc-agenda-axis ui-widget-header">13:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot28 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot29 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot30 fc-minor"><th class="fc-agenda-axis ui-widget-header">13:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot31 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot32 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot33 "><th class="fc-agenda-axis ui-widget-header">14:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot34 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot35 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot36 fc-minor"><th class="fc-agenda-axis ui-widget-header">14:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot37 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot38 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot39 "><th class="fc-agenda-axis ui-widget-header">15:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot40 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot41 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot42 fc-minor"><th class="fc-agenda-axis ui-widget-header">15:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot43 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot44 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot45 "><th class="fc-agenda-axis ui-widget-header">16:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot46 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot47 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot48 fc-minor"><th class="fc-agenda-axis ui-widget-header">16:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot49 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot50 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot51 "><th class="fc-agenda-axis ui-widget-header">17:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot52 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot53 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot54 fc-minor"><th class="fc-agenda-axis ui-widget-header">17:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot55 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot56 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot57 "><th class="fc-agenda-axis ui-widget-header">18:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot58 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot59 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot60 fc-minor"><th class="fc-agenda-axis ui-widget-header">18:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot61 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot62 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot63 "><th class="fc-agenda-axis ui-widget-header">19:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot64 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot65 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot66 fc-minor"><th class="fc-agenda-axis ui-widget-header">19:30</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot67 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot68 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot69 "><th class="fc-agenda-axis ui-widget-header">20:00</th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot70 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr><tr class="fc-slot71 fc-minor"><th class="fc-agenda-axis ui-widget-header"></th><td class="ui-widget-content"><div style="position:relative">&nbsp;</div></td></tr></tbody></table></div></div></div><table style="width: 100%; table-layout: fixed; min-width: 1063px;" class="fc-agenda-days fc-border-separate" cellspacing="0"><colgroup><col style="width: 60px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 167px;"><col style="width: 168px;"></colgroup><thead><tr class="size-row" aria-hidden="true" style="height: 16px;"><th class="floatThead-col" aria-label="Week 1" style="height: 16px;"></th><th class="floatThead-col" aria-label="Monday 9" style="height: 16px;"></th><th class="floatThead-col" aria-label="Tuesday 10" style="height: 16px;"></th><th class="floatThead-col" aria-label="Wednesday 11" style="height: 16px;"></th><th class="floatThead-col" aria-label="Thursday 12" style="height: 16px;"></th><th class="floatThead-col" aria-label="Friday 13" style="height: 16px;"></th><th class="floatThead-col" aria-label="Saturday 14" style="height: 16px;"></th></tr></thead><tbody><tr class="fc-first fc-last"><th class="fc-agenda-axis ui-widget-header fc-first">&nbsp;</th><td class="fc-col0 fc-mon ui-widget-content fc-past"><div style="height: 1511px;"><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-col1 fc-tue ui-widget-content fc-past"><div><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-col2 fc-wed ui-widget-content fc-past"><div><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-col3 fc-thu ui-widget-content fc-past"><div><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-col4 fc-fri ui-widget-content ui-state-highlight fc-today"><div><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-col5 fc-sat ui-widget-content fc-future fc-last"><div><div class="fc-day-content"><div style="position:relative">&nbsp;</div></div></div></td><td class="fc-agenda-gutter ui-widget-content fc-last" style="display: none;">&nbsp;</td></tr></tbody><fthfoot style="display: table-footer-group; border-spacing: 0px; height: 0px; border-collapse: collapse; visibility: hidden;"><fthtr style="display: table-row; border-spacing: 0px; height: 0px; border-collapse: collapse;"><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd><fthtd style="display: table-cell; height: 0px; width: auto;"></fthtd></fthtr></fthfoot></table></div></div></div></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    
+        jQuery("body").attr("id","pantallaCalendari");
+        //Para UPF modo compactado
+    
+</script>
+
+
+
+
+<!-- Progress Dialog -->
+<script type="text/javascript" src="./PubliHoraAlumCalendario_files/progressDialog.js"></script>
+
+
+<!-- Logica generacion archivo importacion sesiones google calendar -->
+<script type="text/javascript">
+    (function($j, w) {
+        $j(function() {
+            $j("#generandoICalc").loadingComponent({
+                icon: '/General/img/sty_upf/imagenes/wait2.gif',
+                title: "Generating ICS",
+                message: "Generating ICS",
+                styleClass: ['Campo']
+            });
+                
+            $j("#download").hide();
+            $j("#error-icalc").hide();
+                
+            $j("#generar").click(function() {
+                $j("#generar").remove();
+                $j("#generandoICalc").show();
+                    
+                $j.ajax({
+                    url : "/pds/control/[mtoGenerarICS]",
+                    type: "POST",
+                    data : {} /*json */,
+                    dataType: "json"
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        $j("#download").show();
+                        $j("#download").attr('href',data.data.result);
+                    } else {
+                        var literalError = "Failed to generate the file.";
+                        if(data.code == 401){
+                            literalError = "Failed to extract the data.
+";
+                        } else if(data.code == 402){
+                            literalError = "No schedules to be processed have been found.";
+                        } else if(data.code == 403){
+                            literalError = "The save path of the files could not be extracted.";
+                        } 
+                        $j("#error-icalc").text(literalError);
+                        $j("#error-icalc").show();
+                    }
+                }).fail(function(xhr, textStatus, error){
+                    $j("#error-icalc").text("Failed to generate the file.");
+                    $j("#error-icalc").show();
+                }).always(function(){
+                    $j("#generandoICalc").remove();
+                });
+                    
+                    
+            });
+        });
+    }(jQuery, window))
+        
+        
+</script>
+
+
+
+
+
+
+
+
+
+<script src="./PubliHoraAlumCalendario_files/jquery.floatThead.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var fechaPeriodoMin=parseIEDate('2018-04-09');
+    var fechaPeriodoMax=parseIEDate('2018-06-29');
+    var semanaInicio= null;
+    var semanaActual=null;
+    var semanaNumber = 1;
+    var MILISEGUNDOS_DIA = 86400000;
+    var MILISEGUNDOS_SEMANA = MILISEGUNDOS_DIA*7;
+    var table;
+
+    jQuery(document).ready(function() {
+        try {
+            if (parent.document.getElementById("esSecretaria") != null &&
+                parent.document.getElementById("esSecretaria").value === "S") {
+                jQuery("body.consultaPublica > div:first").removeClass("container");
+            }
+        } catch (e) {
+            // Esto es porque en moodle da el siguiente error:
+            // SecurityError: Permission denied to access property "document" on cross-origin object
+            // lo que significa que no podemos acceder a la propiedad document del parent, por temas de seguridad.
+            // Para que se pueda cargar igual lo meto en un try catch
+        }
+        jQuery("#error").hide();
+
+        //Ini.MIM
+        //Añadimos el método a la clase date con esto conseguimos que todos los objetos DATE cuenten con esta funcion
+        /**
+         * A partir de la fecha del date recuperamos el número de semana relativa al año en el que está situada.
+         */
+        Date.prototype.getWeek = function() {
+            var onejan = new Date(this.getFullYear(),0,1);
+            return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+        }
+        //fin.MIM
+
+        // Definimos la fecha de posicionamiento inicial del calendario
+        var fechaInicialCalendario = fechaPeriodoMin;
+        var intervalID=null;
+
+        jQuery('a#tornar').click(function() {
+            window.location = "look[conpub]VolverPubHora?rnd=1116.0";
+        });
+        var mostrarEspereModal=null;
+        jQuery("a#imprimir").click(function() {
+            body = jQuery("body").clone();
+            jQuery("div.floatThead-container").empty();
+            jQuery("div.floatThead-container").remove();
+            jQuery("div.fc-agenda").css("height", "100%");
+            mostrarEspereModal= mostrarEspereBoostrap("It is generating the impression");
+            jQuery("#calendar").fullCalendar('option', 'height', 40000);
+            //jQuery("body").attr("id","pantallaCalendari");
+            jQuery('link#printStyle').attr("rel","stylesheet");
+
+            jQuery('#container').css("width","33cm");
+            jQuery('#calendar').css("width","33cm");
+            jQuery('#calendar').fullCalendar('render');
+
+            jQuery('#alertaClicable').hide();
+            jQuery('#alertaTextoExam').hide();
+
+            jQuery(document).ready(function(){
+                intervalID=setInterval(initInterval, 0);
+            });
+
+            return false;
+        });
+
+        var cont= 0;
+
+        function initInterval() {
+            if(jQuery("#container").css("background-color") == "transparent"
+                || jQuery("#container").css("background-color") == "rgba(0, 0, 0, 0)"){
+                print();
+            } else if(cont < 10) {
+                cont++;
+                setTimeout(initInterval, 30);
+            } else {
+                alert("No se ha podido imprimir");
+                jQuery('#alertaClicable').show();
+                jQuery('#alertaTextoExam').show();
+                jQuery(mostrarEspereModal).modal("hide");
+            }
+            clearInterval(intervalID);
+
+        }
+        var w;
+        var imatge;
+        function print(){
+            html2canvas(jQuery("#container"), {
+
+                onrendered: function(canvas) {
+                    imatge = '<style>@page {margin: 0.5cm;size: A4;} </style>';
+                    imatge += '<div style="display:block;width:200mm;height:285mm;">\n\
+                                <img id="canvas" style="margin:auto;max-width: 200mm; max-height: 100%;" src="'+canvas.toDataURL("image/png")+'">\n\
+                                </div>\n\
+                                </div>';
+                    w = window.open();
+                    if (w != undefined) {
+                        jQuery(w.document.body).append(imatge);
+                        w.focus();
+                        setTimeout(function () {
+                            w.print();
+                            w.close();
+                        }, 250);
+                        jQuery('link#printStyle').attr("rel","none");
+                        jQuery('#container').css("width","900px");
+                        jQuery('#calendar').css("width","800px");
+                        jQuery("body").attr("id","");
+                        renderFloatThead();
+                        jQuery(mostrarEspereModal).modal("hide");
+                        jQuery('#alertaClicable').show();
+                        jQuery('#alertaTextoExam').show();
+                    } else {
+                        /*En caso que el navegador bloquee las ventanas emergentes (Safari y Chrome)
+                          sobreescribimos la pagina actual con un div vacio al que le inserto
+                          via jquery los botones y la imagen a imprimir*/
+                        jQuery(mostrarEspereModal).modal("hide");
+
+                        jQuery("body").html("<div id='container'></div>");
+                        //Botones de imprimir y volver
+                        jQuery("#container").append("<div id='botones' aria-expanded='true' class='collapse in'><a id='atras' class='btn btn-sm btn-default' title='Return'><i class='fa fa-reply'></i> Return</a></div>");
+                        jQuery("#botones").append('<a id="imprimir"  class="btn btn-sm btn-default" title="Print"><i class="fa fa-print"></i> Print</a>');
+                        //Imagen con el horario que se va a imprimir
+                        jQuery("#container").append("<div id='imagen'>"+imatge+"</div>");
+
+                        jQuery("#icono").css("margin-left", "0px");
+                        jQuery("#atras").css("margin-right", "7px");
+
+                        jQuery("#atras").click(function(){
+                            //window.location.replace("");
+                            //En vez de ir a la pagina anterior, recargo la pagina del calendario que previamente habia guardado
+                            jQuery("body").html("");
+//                            jQuery("body").html(body.html());
+                            jQuery("body").html(body);
+                            jQuery("div#calendar > .fc-header:eq(1)").hide();
+                            jQuery("div#calendar > .fc-content:eq(1)").hide();
+                        });
+
+                        jQuery("#imprimir").click(function(){
+                            jQuery("#botones").collapse("hide");
+                            //Restraso para la que el dialogo de imprimir no aparezca antes de que se minimizen los botones
+                            setTimeout(window.print, 500);
+                            //Despues de un tiempo prudencial vovlemos a mostrar los botones
+                            setTimeout(mostrarBotones, 2000);
+                        });
+
+                        function mostrarBotones() {
+                            jQuery("#botones").collapse("show");
+                            jQuery("#icono").children("span").attr("class", "glyphicon glyphicon-collapse-up");
+                        }
+
+                    }
+                }
+            });
+        }
+
+        //Comprobamos si podemos mostrar el boton HOY, debe estar dentro del periodo para poderlo mostrar
+        var hoy = new Date();
+        var txtHoy="";
+        if(hoy.getTime()>=fechaPeriodoMin.getTime() && hoy.getTime()<=fechaPeriodoMax.getTime()){
+            txtHoy="today,";
+            // En el caso que la fecha de hoy esté dentro del periodo, la seteamos cómo la fecha de posicionamiento inicial
+            fechaInicialCalendario = hoy;
+        }
+
+        jQuery('#calendar').fullCalendar({
+            height:  40000,
+            year: fechaInicialCalendario.getFullYear(),
+            month: fechaInicialCalendario.getMonth(),
+            date: fechaInicialCalendario.getDate(),
+            theme: true,                 //activar temes Jquery UI
+            defaultView:'agendaWeek',     //vista per defecte
+            weekends: true ,  //mostrar cap de setmana
+            hiddenDays : [0], //Los domingos nunca deben aparecer
+            firstDay: 1,                 //mostrar el dilluns com a primer día de la setmana
+            weekNumbers:true,            //número de setmanes
+            weekMode:'fixed',
+            dayNames:['Sunday',
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday'],
+            //dies de la setmana en català  (versió llarga)
+            dayNamesShort: ['L',
+                'M',
+                'X',
+                'J',
+                'V',
+                'S',
+                'D'],
+            //dies de la setmana en català  (versió curta)
+            monthNames: ['January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'],
+            //mesos de l'any en català  (versió llarga)
+            monthNamesShort :['Jan.',
+                'Feb.',
+                'Mar.',
+                'Apr.',
+                'May.',
+                'Jun.',
+                'Jul.',
+                'Aug.',
+                'Sept.',
+                'October',
+                'November',
+                'December'],
+            //mesos de l'any en català  (versió curta)                                                //mesos de l'any en català  (versió curta)
+            header: {                                         //botons del header
+                left:'prev,next',
+                center: 'title',
+                right: txtHoy+'agendaDay,agendaWeek'
+            },
+            buttonText:{                                      //text dels botons
+                prev:     '&lsaquo;', // <
+                next:     '&rsaquo;', // >
+                prevYear: '&laquo;',  // <<
+                nextYear: '&raquo;',  // >>
+                today:    'Today',
+                month:    'Mes',
+                week:     'Week',
+                day:      'Day'
+            },
+            weekNumberTitle:'',                                   //Text del número de la setmana
+            allDaySlot:false,                                 //secció a sobre per mostrar esdeveniment de 'tot el dia''
+            allDayText:'',                                        //text de 'all day''
+            allDayDefault:false ,
+            defaultEventMinutes: 30,
+            slotMinutes:10,                                   //interval de division horàries
+            firstHour:8,                                      //primera hora a mostrar
+            axisFormat : 'HH:mm',
+            minTime :'08:30',
+            maxTime:'20:30',
+            slotEventOverlap: false,
+            titleFormat: {
+                month: 'MMMM yyyy',                                     // Juliol 2013
+                week: " dd [MMMM] [ yyyy]{ '&#8212;' dd MMMM yyyy}",   // 01 ? 05 Juliol 2013
+                day: 'dddd dd MMMM yyyy'                            // Dijous 04 Juliol 2013
+            } ,
+            columnFormat:{                                    //text de les capçaleres
+                month: 'dddd',    // Monday
+                week: 'dddd d', // Monday 9
+                day: 'dddd d'  // Monday 9
+            } ,
+            editable: false,                                 //esdeveniment editables
+            eventMouseover: function (data, event, view) {
+            },
+            eventMouseout: function (data, event, view) {
+            },
+            eventClick: function(result, event, view) {
+
+                if(result.className != 'festiu' && result.className != 'nolectiu' && result.className != 'vacances') {
+                    var borderColor = jQuery(this).find('.fc-event-time').css('background-color');
+                    mostrarModalDetalle({
+                                codAsignatura : result.codAsignatura,
+                                codPlan : result.codPlan,
+                                codEstudi : result.codEstudi,
+                                edicion : result.edicion,
+                                codGrupo : result.codGrupo,
+                                reseId : result.reseId,
+                                start : result.start.getTime(),
+                                end : result.end.getTime(),
+                                color : borderColor
+                            });
+                    }
+                },
+                eventRender: function (event, element) {
+
+                    var tag = element.find('.fc-event-title');
+                    if(event.className != 'festiu' && event.className != 'nolectiu' && event.className != 'vacances') {
+
+                        //infoAdicional --> este class es necesario para que se alinee el icono abajo a la izquierda
+//                        if(event.estaRepartido == 'N' && false) {
+//                            
+//                            element.find('.fc-event-inner').append('<span class="fa-stack infoAdicional" title="No assigned group"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-warning fa-stack-1x fa-inverse"></i></span>');
+//                        }else  if(event.publicarObservacion == 'S' && event.observacion.length > 0) {
+//                            element.find('.fc-event-inner').append('<span class="glyphicon glyphicon-info-sign" title="Additional information"></span>');
+//                            jQuery(".glyphicon-info-sign").css("margin-left", "6px");
+//                            jQuery(".glyphicon-info-sign").css("font-size", "14px");
+//                        }else if(event.publicarComentario == 'S' && event.comentario.length > 0){
+//                            element.find('.fc-event-inner').append('<span class="glyphicon glyphicon-info-sign" title="Additional information"></span>');
+//                            jQuery(".glyphicon-info-sign").css("margin-left", "6px");
+//                            jQuery(".glyphicon, .glyphicon-info-sign").css("font-size", "14px");
+//                        }
+
+                        //MIM: En caso de que sea vista semanal, se recortará la descripción de forma que pueda leerse sin
+                        //que solape otras descripciones. De ser vista diaria, se pondrá la descripción de forma completa
+                        //para su mejor lectura.
+                        var isWeek = jQuery(".ui-state-active").hasClass("fc-button-agendaWeek");
+                        var desc = /*isWeek && tag.html().length > 20? tag.html().substring(0, 20) + "..." :*/ tag.html();
+
+                        var literalAula = "";
+                        if(event.fusionado == 'S' && event.aula != ""){
+                            literalAula = "Classrooms";
+                        }else if(event.fusionado == 'N' && event.aula != ""){
+                            literalAula = "Classroom";
+                        }else{
+                            literalAula = "No classrooms assigned";
+                        }
+
+                        var descripcionCompleta = "<p>";
+                        if(event.estaRepartido == 'N' && false) {
+                            
+                            descripcionCompleta += '<span class="fa-stack infoAdicional" title="No assigned group"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-warning fa-stack-1x fa-inverse"></i></span>';
+                        }else  if(event.publicarObservacion == 'S' && event.observacion.length > 0) {
+                            descripcionCompleta += '<span class="glyphicon glyphicon-info-sign" title="Additional information"></span>';
+                        }else if(event.publicarComentario == 'S' && event.comentario.length > 0){
+                            descripcionCompleta += '<span class="glyphicon glyphicon-info-sign" title="Additional information"></span>';
+                        }
+                        
+                        jQuery(".glyphicon-info-sign").css("margin-left", "2px");
+                        jQuery(".glyphicon-info-sign").css("margin-right", "2px");
+                        jQuery(".glyphicon-info-sign").css("margin-top", "4px");
+                        jQuery(".glyphicon, .glyphicon-info-sign").css("font-size", "12px");
+
+                        descripcionCompleta +=  event.codAsignatura + " - " +desc
+                            + "<br>Group "
+                            + event.grup;
+
+                        if(event.publicarComentario == 'S'){
+                            descripcionCompleta += " - "+event.comentario;
+                        } else if (true && event.ocultarDescTipologia == "N") {
+                            descripcionCompleta += " - "+event.tipologia;
+                        }
+
+
+                        if(true && event.ocultarAula == "N"){
+
+                            descripcionCompleta += "<br>" + literalAula +" " + event.aula;
+                        }
+                        var i;
+
+                        if(event.profesores.length!=0){
+                            descripcionCompleta += "<br>Teachers";
+                        }
+
+                        for (i = 0; i < event.profesores.length; i++) {
+                            var auxProf = event.profesores[i];
+                            descripcionCompleta += "<br>" + auxProf;
+                        }
+
+                        descripcionCompleta += "</p>";
+
+
+                        tag.html(descripcionCompleta);
+                    }else{
+                       element.find('.fc-event-time').remove();
+                    }
+
+                    /* habría que encontrar una solucion mejor!!
+                     * al codificar en html el valor &egrave; lo codifica como &amp;egrave; */
+                    tag.html(tag.html().split("&amp;").join("&"));
+                }, // fin eventRender
+                dayClick:function(date,jsEvent, view) {
+                    //MIM: evitar que se pueda pulsar un día fuera del periodo, para ello salimos de la funcion sin informar
+                    //el cambio
+                    var tmpDate = new Date(date);
+                    //Puesto que los periodos no tienen horas, lo seteamos a 0
+                    tmpDate.setHours(0,0,0,0);
+                    var btnPrevVisible=fechaPeriodoMin.getTime()<=tmpDate.getTime();
+                    var btnNextVisible=fechaPeriodoMax.getTime()>=tmpDate.getTime();
+                    if(!btnPrevVisible || !btnNextVisible) {
+                        return;
+                    }
+                    var isWeek = jQuery(".ui-state-active").hasClass("fc-button-agendaWeek");
+                    var viewName = 'agendaWeek'
+                    if(isWeek){
+                        viewName='agendaDay';
+                    }
+                    jQuery('#calendar').fullCalendar('changeView', viewName);
+                    jQuery('#calendar').fullCalendar('gotoDate', date);
+                    renderFloatThead();
+                },
+                eventResizeStart: function() { },
+                eventDragStart: function() { },
+                viewDisplay: function(view) {
+                    var mostrarMediaHora=true ?
+                        "th:first-child:contains(':30'), th:first-child:contains(':00')":
+                        "th:first-child:contains(':00')";
+                        var slots = jQuery("table.fc-agenda-slots tbody [class^=fc-slot]");
+                        jQuery(jQuery.grep(slots, function(value, index) {
+                                var th = jQuery(value).find(mostrarMediaHora);
+                                return !th.length
+                        })).find("th").text('');
+
+                    //MIM:
+                    //Ocultar botones mover adelante,atras
+                    var tmpDate = new Date(view.visStart);
+                    //Puesto que los periodos no tienen horas, lo seteamos a 0
+                    tmpDate.setHours(0,0,0,0);
+                    //Si la fecha actual es menor que la fecha mínima, la mostramos
+                    var btnPrevVisible=fechaPeriodoMin.getTime()<tmpDate.getTime();
+                    jQuery('span.fc-button-prev').css("visibility",btnPrevVisible?"":"hidden");
+
+                    //calculamos el numero de semana en base a la diferencia entre el inicio del periodo y la fecha actual
+                    var diferencia = tmpDate.getTime()-fechaPeriodoMin.getTime();
+                    diferencia = diferencia / MILISEGUNDOS_SEMANA;
+                    semanaNumber = Math.floor(diferencia)+1;
+                    jQuery('th.fc-week-number:visible').html('Week '+semanaNumber);
+
+                    tmpDate = new Date(view.visEnd);
+                    tmpDate.setHours(0,0,0,0);
+                    //Si la fecha actual es menor que la fecha máxima, la mostramos
+                    var btnNextVisible=fechaPeriodoMax.getTime() >= tmpDate.getTime();
+                    jQuery('span.fc-button-next').css("visibility",btnNextVisible?"":"hidden");
+
+                    //Al movernos por el calendario, se debe actualizar la combo, para mostrar el mes actual
+                    //Si es vista diaria, muestra el mes del dia actual, si es vista semanal, muestra el mes del ultimo dia visible de la semana
+                    jQuery('span.fc-button-prev').on('click', actualizarCombo());
+                    jQuery('span.fc-button-next').on('click', actualizarCombo());
+                },
+                timeFormat:{
+                    // for agendaWeek and agendaDay
+                    agenda: 'HH:mm{ - HH:mm}', // 5:00 - 6:30
+
+                    // for all other views
+                    '': 'HH:mm{ - HH:mm}'            // 7p
+                },
+                events: function(start, end, callback) {
+                    var modalEspere= mostrarEspereBoostrap("Processing your request");
+                    jQuery.ajax({
+                        url: '[Ajax]selecionarRangoHorarios?rnd=2788.0',
+                        contentType:"application/json; charset=utf-8",
+                        data: {
+                            start:  Math.round(start.getTime()/1000),
+                            end: Math.round(end.getTime()/1000)
+                        },
+                        success: function(data) {
+                            var events = [];
+                            var objetoMensaje = data.pop();
+                            if ( objetoMensaje.mostrarMensaje ) {
+                              jQuery("#alertaTextoSemanal").html(objetoMensaje.mensajeSemana);
+                              jQuery("#alertaTextoSemanal").show();
+                            } else {
+                              jQuery("#alertaTextoSemanal").hide();
+                            }
+                            if(!!data){
+                                jQuery.map( data, function( r ) {
+                                    events.push(r);
+                                });
+                            }
+                            jQuery(modalEspere).modal("hide");
+                            callback(events);
+                        }
+                    });
+                }
+            }); // fin jQuery('#calendar').fullCalendar({
+
+            /* repintamos la pantalla para que escale correctamente */
+            jQuery(window).load(function () {
+                rerenderCalendari();
+                renderFloatThead();
+            });
+
+            jQuery( window ).resize(function() {
+                rerenderCalendari();
+                renderFloatThead();
+            });
+
+            //ref 126280
+            var comboMesesAnyos = $("<select id=\"comboMesesAnyos\" name=\"comboMesesAnyos\" onchange=\"irAFecha()\" />");
+            
+              jQuery('<option />', {value: '4/2018', text: 'April/2018'}).appendTo(comboMesesAnyos);
+            
+              jQuery('<option />', {value: '5/2018', text: 'May/2018'}).appendTo(comboMesesAnyos);
+            
+              jQuery('<option />', {value: '6/2018', text: 'June/2018'}).appendTo(comboMesesAnyos);
+            
+            comboMesesAnyos.appendTo('.fc-header-left');
+
+//            renderFloatThead();
+
+            jQuery("td.fc-header-left > span.fc-button-next, span.fc-button-prev, \n\
+                    td.fc-header-right > span.fc-button-agendaDay, span.fc-button-agendaWeek, span.fc-button-today").bind("click", function() {
+                        renderFloatThead();
+                    });
+        }); // fin jQuery(document).ready
+
+        function renderFloatThead() {
+            //Seteamos el heigth y el overflow para que aparezca el scroll
+            jQuery("div.fc-agenda").css("height", "750px");
+            jQuery("div.fc-agenda").css("overflow-y", "auto");
+            //Guardamos la posicion del scroll y la seteamos a arriba del todo
+            //porque si no al cambiar de semana te cargara a partir de la primera hora que aparezca
+            //ocultando la parte superior del calendario y no se verian las horas anteriores
+            var scroll = jQuery("div.fc-agenda").scrollTop();
+            jQuery("div.fc-agenda").scrollTop(0);
+            //volvemos a cargar el calendario para que aparezcan todas las horas que tocan
+            rerenderCalendari();
+            //Eliminamos el thead flotante y lo volvemos a crear para que se cambien los dias de la semana
+            jQuery(".floatThead-container").remove();
+            jQuery("div.fc-content").find("table.fc-agenda-days:eq(0)").floatThead({scrollContainer: true});
+            //Volvemos a dejar el scroll donde estaba.
+            jQuery("div.fc-agenda").scrollTop(scroll);
+        }
+
+        function rerenderCalendari(){
+            jQuery('#calendar').fullCalendar('render');
+        }
+
+        function irAFecha() {
+          var selected = jQuery("#comboMesesAnyos").val();
+          var mesADeplazarnos = selected.split('/')[0];
+          var anyoADesplazarnos = selected.split('/')[1];
+          var diaADesplazarnos = 1;
+
+          var fechaDesplazarnos = new Date(mesADeplazarnos+"/01/"+anyoADesplazarnos); // mes/dia/año
+
+          var diaSemana = fechaDesplazarnos.getUTCDay();
+          if ( diaSemana == 6 || (false && diaSemana == 5 ) ) {
+            //Si cae en domingo siempre cambiaremos el dia al que desplazarnos, dado que aunque se muestren los fines de semana
+            //el domingo queda oculto. En caso de caer en sábado, solo se hará el cambio si no se muestra el fin de semana
+            if ( diaSemana == 5 ) {
+              //sabado
+              diaADesplazarnos = 3;
+            } else {
+              //domingo
+              diaADesplazarnos = 2;
+            }
+            fechaDesplazarnos = new Date(mesADeplazarnos+"/"+diaADesplazarnos+"/"+anyoADesplazarnos); // mes/dia/año
+          }
+
+          if ( fechaDesplazarnos.getTime() < fechaPeriodoMin.getTime() ) {
+            //no estamos yendo más atrás que lo que permite la fecha mínima del periodo. Lo corregimos
+            diaADesplazarnos = fechaPeriodoMin.getDate(); //retorna el dia dentro del mes
+          }
+
+          jQuery('#calendar').fullCalendar('gotoDate', anyoADesplazarnos, mesADeplazarnos - 1, diaADesplazarnos); //month from 1 - 12
+          renderFloatThead();
+        }
+        
+        function irAFechaExamFinal(anoAcademico, mes, dia){
+            // Ojo se utiliza en varias JSP("info_pubHoraClase.jsp","info_pubHoraClaseAlumno.jsp","info_pubHoraClaseProfesor.jsp")
+            jQuery('#calendar').fullCalendar( 'gotoDate', anoAcademico, mes, dia);
+            renderFloatThead();
+        }
+
+        function actualizarCombo() {
+          if ( jQuery("#comboMesesAnyos").length == 0 ) {
+            //la combo aún no existe, no hacemos nada
+            return;
+          }
+          //fullCalendar('getView').visEnd nos retorna las 00:00 del dia siguiente al visible, con el -1 (restamos un milisegundo)
+          //obtenemos el dia anterior a las 23:59:59 que ya nos sirve
+          var ultimoDiaSemanaVisible = new Date(jQuery('#calendar').fullCalendar('getView').visEnd.getTime()-1);
+          var mesUltimoDiaSemanaVisible = ultimoDiaSemanaVisible.getMonth()+1; //los meses van del 0 al 11
+          if ( mesUltimoDiaSemanaVisible != jQuery("#comboMesesAnyos").val().split('/')[0] ) {
+            //ha habido un cambio de mes, pero no a través de la combo, debemos actualizarla
+            var anyoCombo = jQuery("#comboMesesAnyos").val().split('/')[1];
+            if ( (ultimoDiaSemanaVisible.getYear()+1900) != anyoCombo ) {
+              //se ha cambiado de año
+              anyoCombo = (ultimoDiaSemanaVisible.getYear()+1900);
+            }
+            jQuery("#comboMesesAnyos").val((ultimoDiaSemanaVisible.getMonth()+1)+"/"+anyoCombo);
+          }
+        }
+
+        function generarDivProfesor(htmlGenerado, auxProf, i){
+            htmlGenerado +="  <div class='profesor " ;
+            if(i == 0){
+                htmlGenerado +=" bg-info'  ";
+            }else  if(i == 1){
+                htmlGenerado +=" bg-success' ";
+            }else  if(i == 2){
+                htmlGenerado +=" bg-primary' ";
+            }else  if(i == 3){
+                htmlGenerado +=" bg-warning' ";
+            }else  if(i == 4){
+                htmlGenerado +=" bg-danger' ";
+            }
+
+            htmlGenerado += "style='left:" + auxProf.left + "%;width:" + auxProf.width + "%'";
+            htmlGenerado +=" >" + auxProf.nombreProfesor + "</div> ";
+
+            return htmlGenerado;
+        }
+
+        function parseIEDate(dateStringInRange) {
+            var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+            date = new Date(NaN), month,
+            parts = isoExp.exec(dateStringInRange);
+
+            if(parts) {
+                month = +parts[2];
+                date.setFullYear(parts[1], month - 1, parts[3]);
+                if(month != date.getMonth() + 1) {
+                    date.setTime(NaN);
+                }
+            }
+            return date;
+        }
+
+    function generarLista(info){
+        var descs = info.split("#7#");
+        var list = "<ul>";
+        for (var i = 0; i < descs.length; i++) {
+            list += "<li>"+descs[i]+"</li>";
+        }
+        list +="</ul>";
+        return list;
+    }
+
+    function mostrarModalDetalle(parametros){
+        var aleatorio = Math.round(Math.random()*10000);
+        jQuery.ajax(
+        {url:"PubliHoraAlumTimetableAjax?rnd="+aleatorio,
+            data: parametros,
+            contentType:"application/json; charset=utf-8",
+            success:function(data){
+
+                jQuery("#error").hide();
+                if(data.error != undefined){
+                    jQuery("#error").html('<i class="fa fa-times"></i>&nbsp;&nbsp;' + data.error);
+                    jQuery("#error").show();
+                    return;
+                }
+                if(data.descCentro.indexOf("#7#") > -1){
+                    jQuery("#labelDescCentro").html('Centros:');
+                    jQuery("#descCentro").html(generarLista(data.descCentro));
+
+                }else{
+                    jQuery("#descCentro").html(data.descCentro);
+                    jQuery("#labelDescCentro").html('Center:');
+                }
+                if(data.descPlan.indexOf("#7#") > -1){
+                    jQuery("#descPlan").html(generarLista(data.descPlan));
+                    jQuery("#labelDescPlan").html('Plans:');
+                }else{
+                    jQuery("#descPlan").html(data.descPlan);
+                    jQuery("#labelDescPlan").html('Plan:');
+                }
+                
+                    if(data.descEstudio.indexOf("#7#") > -1){
+                        jQuery("#descEstudio").html(generarLista(data.descEstudio));
+                        jQuery("#labelDescEstudio").html('Estudis:');
+                    }else{
+                        jQuery("#descEstudio").html(data.descEstudio);
+                        jQuery("#labelDescEstudio").html('Study:');
+                    }
+                
+                if(true && data.ocultarAula == "N" ){
+                    if(data.descAula.indexOf("#7#") > -1){
+                        jQuery("#descAula").html(generarLista(data.descAula));
+                        jQuery("#labelDescAula").html('Classrooms:');
+                    }else{
+                        jQuery("#descAula").html(data.descAula);
+                        jQuery("#labelDescAula").html('Classroom:');
+                    }
+                } else {
+                  jQuery("#descAula").html("");
+                  jQuery("#labelDescAula").html("");
+                }
+                 if(data.tipoExamen != undefined){
+                    jQuery("#descTipoExamen").html(data.tipoExamen);
+                    jQuery("#mostrarTipoExamen").show();
+                }else{
+                    jQuery("#mostrarTipoExamen").hide();
+                }
+                if(data.grupoIdioma != undefined){
+                    jQuery("#descGrupoIidoma").html(data.grupoIdioma);
+                    jQuery("#mostrarGrupoIdioma").show();
+                }else{
+                    jQuery("#mostrarGrupoIdioma").hide();
+                }
+                if(data.planPropietario != undefined && data.descPlan != data.planPropietario){
+                    jQuery("#descPlanPropietario").html(data.planPropietario);
+                    jQuery("#mostrarPlanPropietario").show();
+                }else{
+                    jQuery("#mostrarPlanPropietario").hide();
+                }
+                jQuery("#descAsignatura").html(data.descAsignatura);
+                if(true && data.ocultarDescTipologia == "N"){
+                    jQuery("#labelDescTipologia").html('Typology:');
+                    jQuery("#descTipologia").html(data.descTipologia);
+                }else{
+                  jQuery("#labelDescTipologia").html("");
+                  jQuery("#descTipologia").html("");
+                }
+                jQuery("#descGrupo").html(data.descGrupo);
+                jQuery("#descFecha").html(data.descFecha);
+                jQuery("#descHoraInicio").html(data.descHoraInicio);
+                jQuery("#descHoraFin").html(data.descHoraFin);
+                jQuery("#horaInicio").html(data.horaIniTabla);
+                jQuery("#horaFin").html(data.horaFinTabla);
+
+                jQuery("#mostrarObservaciones").hide();
+                if(data.publicarObservacion == 'S' && data.descObservaciones.length > 0){
+                    if(data.descObservaciones.indexOf("#7#") > -1){
+                        jQuery("#contenidoObservacion").html(generarLista(data.descObservaciones));
+                    }else{
+                        jQuery("#contenidoObservacion").html(data.descObservaciones);
+                    }
+                    jQuery("#mostrarObservaciones").show();
+
+                }
+
+                jQuery("#mostrarComentarios").hide();
+                if(data.publicarComentario == 'S' && data.descComentarios.length > 0){
+                        jQuery("#contenidoComentario").html(data.descComentarios);
+                    jQuery("#mostrarComentarios").show();
+
+                }
+
+                if(false){
+                  
+                  if(data.repartido == 'S'){
+                      jQuery("#repartido").hide();
+                  } else {
+                    jQuery("#repartido").show();
+                  }
+                } else {
+                  
+                    jQuery("#repartido").hide();
+                }
+
+                //                                                   left:0%;
+                //        width:25%;
+                var htmlGenerado = "";
+
+                if(data.listaHoras.length == 0){
+                    htmlGenerado += "   <th><span class='hora' style='color:transparent'>" + data.listaHoras[i] + "</span></th> ";
+
+                }else{
+                    for (var i = 0; i < data.listaHoras.length; i++) {
+                        htmlGenerado += "   <th><span class='hora'>" + data.listaHoras[i] + "</span></th> ";
+                    }
+                    htmlGenerado += "   <th><span class='hora' style='color:transparent'>00:00</span></th> ";
+                }
+
+                if(data.fusionado == 'S'){
+                    htmlGenerado =  "<th class=\"camposRegistrosFusionados headerVertical\">Classrooms</th>" + htmlGenerado;
+                }
+                jQuery("#idHoras").html(htmlGenerado);
+                jQuery("#inicioFin").attr("colspan", data.listaHoras.length + 1);
+                //Eliminar datos registro fusionado previamente
+                jQuery('#tbodyAulaProfesores').find('tr').each(function( index, element ) {
+                    if(jQuery(element).attr('id') != 'trAulaProfesores'){
+                        jQuery(element).remove();
+                    }
+                });
+                if(data.fusionado == 'N'){
+                    jQuery(".camposRegistrosFusionados").hide();
+                    if(data.listaProfesores != null && data.listaProfesores.length > 0){
+                        htmlGenerado = "";
+                        var i;
+                        for (i = 0; i < data.listaProfesores.length; i++) {
+                            var auxProf = data.listaProfesores[i];
+                            htmlGenerado = generarDivProfesor(htmlGenerado, auxProf, i);
+                        }
+                        jQuery("#profesores").attr("colspan", data.listaHoras.length+1);
+                        jQuery("#profesores").attr("style","background-size: " + data.background + "%");
+                        jQuery("#profesores").html(htmlGenerado);
+                        jQuery("#mostrarProfesores").show();
+
+                    }else{
+                        jQuery("#mostrarProfesores").hide();
+                    }
+                }else{
+                    //Nose pk pero no funciona el lenght
+                    var size = 0;
+                    for (var aula in data.aulaProfesUnificado) {
+                        size++;
+                    }
+                    if(size>1){
+                        jQuery(".camposRegistrosFusionados").show();
+                    }else{
+                        jQuery(".camposRegistrosFusionados").hide();
+                    }
+                    if(data.aulaProfesUnificado != null && size > 0){
+                        var primeraIteracion = true;
+                        var existeAlgunProfesor = false;
+                        for (var aula in data.aulaProfesUnificado) {
+                            htmlGenerado = "";
+                            if(!primeraIteracion){
+                                //Clono tr
+                                var trClonado = jQuery("#trAulaProfesores").clone();
+                                //Elimino todas las id del tr previamente tratado
+                                jQuery('#tbodyAulaProfesores').find('tr, td, th').removeAttr('id');
+                                //Añado tr clonado
+                                jQuery(trClonado).appendTo("#tbodyAulaProfesores");
+                            }
+                            var i;
+                            for (i = 0; i < data.aulaProfesUnificado[aula].length; i++) {
+                                var auxProf = data.aulaProfesUnificado[aula][i];
+                                htmlGenerado = generarDivProfesor(htmlGenerado, auxProf, i);
+                                existeAlgunProfesor = true;
+                            }
+                            jQuery("#profesores").attr("colspan", data.listaHoras.length+1);
+                            jQuery("#profesores").attr("style","background-size: " + data.background + "%");
+                            jQuery("#profesores").html(htmlGenerado);
+                            jQuery("#aula").html(aula);
+                            primeraIteracion = false;
+                        }
+                        if(existeAlgunProfesor){
+                            jQuery("#mostrarProfesores").show();
+                        }else{
+                            jQuery("#mostrarProfesores").hide();
+                        }
+
+                    }else{
+                        jQuery("#mostrarProfesores").hide();
+                    }
+                }
+
+
+                jQuery('#modalDetalleSesion').find('.modal-header').css('border-color', parametros.color);
+                jQuery('#modalDetalleSesion').find('.modal-header').css('border-width', '2px');
+                jQuery('#modalDetalleSesion').modal('show');
+            }});
+        }
+</script>
+
+
+
+
+<div class="modal fade" id="modalDetalleSesion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+
+
+
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close botonCerrar" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4><p class="modal-title" id="descAsignatura"></p></h4>
+            </div>
+        <div class="modal-body">
+            <h4 title=""><i class="fa fa-file-text-o"></i>&nbsp;Session's file card</h4>
+            <form role="form" class="form-horizontal">
+                 <div class="row">
+                     <div class="col-md-12 col-sm-12">
+                        <div class="form-group ">
+                            <label class="col-sm-2 col-md-2 control-label" id="labelDescCentro"></label>
+                            <div class="col-sm-10 col-md-10">
+                                <p class="form-control-static" id="descCentro"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group" id="mostrarEstudio">
+                            <label class="col-sm-4 col-md-4 control-label" id="labelDescEstudio"></label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descEstudio"></p>
+                            </div>
+                        </div>  
+                        <div class="form-group ">
+                            <label class="col-sm-4 col-md-4 control-label" id="labelDescPlan"></label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descPlan"></p>
+                            </div>
+                        </div>
+                        <div class="form-group" id="mostrarPlanPropietario">
+                            <label class="col-sm-4 col-md-4 control-label">Owner's plan:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descPlanPropietario"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label">Group:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descGrupo"></p>
+                            </div>
+                        </div>     
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label" id="labelDescTipologia"></label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descTipologia"></p>
+                            </div>
+                        </div>   
+                        <div class="form-group" id="mostrarGrupoIdioma">
+                            <label class="col-sm-4 col-md-4 control-label">Language group:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descGrupoIidoma"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label" id="labelDescAula"></label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descAula"></p>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label">Date:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descFecha"></p>
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label">Start hour:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descHoraInicio"></p>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-4 control-label">End hour:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descHoraFin"></p>
+                            </div>
+                        </div> 
+                        <div class="form-group" id="mostrarTipoExamen">
+                            <label class="col-sm-4 col-md-4 control-label">Exam type:</label>
+                            <div class="col-sm-8 col-md-8">
+                                <p class="form-control-static" id="descTipoExamen"></p>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </form>
+            <div id="mostrarProfesores">
+                <br>  
+                <h4 title=""><i class="fa fa-group"></i>&nbsp;Teachers</h4> 
+
+                <table class="table table-bordered table-responsive tablaProfesores">
+                    <thead>
+                        <tr>
+                            <th class="camposRegistrosFusionados clear"></th>
+                            <th colspan="9" id="inicioFin">
+                                <span id="horaInicio"></span>
+                                <span id="horaFin"></span>
+                            </th>
+                        </tr>        
+                        <tr id="idHoras"></tr>
+                    </thead>  
+                    <tbody id="tbodyAulaProfesores">
+                        <tr id="trAulaProfesores">
+                            <th id="aula" class="camposRegistrosFusionados headerVertical"></th>
+                            <td id="profesores"></td>     
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="mostrarComentarios">
+                <br> 
+                <h4 title=""><i class="fa fa-bookmark"></i> Comments</h4> 
+                <p id="contenidoComentario"></p>
+            </div>
+            <div id="mostrarObservaciones">
+                <br> 
+                <h4 title=""><i class="fa fa-bookmark"></i> Observations</h4> 
+                <p id="contenidoObservacion"></p>
+            </div>
+            
+            <div class="alert alert-info fade in " id="repartido"><i class="fa fa-warning fa-lg"></i> &nbsp;The student is not assigned in this group</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default botonCerrar" data-dismiss="modal">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+                    </div>
+                    <iframe id="bajoespere" src="./PubliHoraAlumCalendario_files/saved_resource.html">
+                    </iframe>
+                    <div id="espere">
+                        <table border="0" id="tablamensajeespere">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                            </tbody><tbody>
+                        </tbody></table>
+                    </div>
+<!--                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                     <div class="modal-dialog modalLoading">
+                       <div class="modal-content">
+                         <i class="fa fa-spinner fa-spin fa-5x"></i><br>
+                         Cargando
+                       </div>
+                     </div>      
+                    </div>                    -->
+                    <iframe id="AplFondoZonaOculta" src="./PubliHoraAlumCalendario_files/saved_resource(1).html">
+                    </iframe>
+                    <div id="AplZonaOculta">
+                        <iframe id="iframe_oculto" scrolling="no" frameborder="no" width="100%" height="500" src="./PubliHoraAlumCalendario_files/saved_resource(2).html"></iframe>
+                    </div>
+                    <div id="MensajeOculto">
+                        <div id="AplZonaEdicion">
+                            <table border="0" id="divmensaje" width="100%" align="center">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody><tbody>
+                            </tbody></table>
+                            <div class="sigAccion" align="center">
+                                <a href="javascript:CerrarMensaje();" class="sigBtnHref">
+                                    <span class="btnAceptar">
+                                        Accept
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                    </script>
+                </div> <!-- container -->
+            </div> <!--wrap -->
+        </div> <!-- page-content -->
+       
+        
+        <footer role="contentinfo" style="margin: 0px; position: fixed; bottom: 0px; width: 100%; display: none;">
+            <div class="clearfix">
+                <!--ul class="list-unstyled list-inline pull-left">
+                    <li>SIGMA AIE &copy; 2014</li>
+                </ul-->
+                <button class="pull-right btn btn-inverse-alt hidden-print tooltips" id="back-to-top" title="" data-original-title="Upturn"><i class="fa fa-arrow-up fa-2x"></i></button>
+            </div>
+        </footer>
+    </div> <!-- page-container -->
+
+    <!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="/General/assets/js/jquery-1.10.2.min.js"%3E%3C/script%3E'))</script>
+    <script type="text/javascript">!window.jQuery.ui && document.write(unescape('%3Cscript src="/General/assets/js/jqueryui-1.10.3.min.js'))</script>    
+    -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- <script type="text/javascript" src="/General/assets/js/less.js"></script> -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/bootbox.min.js"></script> 
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/enquire.js"></script> 
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/jquery.cookie.js"></script> 
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/jquery.nicescroll.min.js"></script> 
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/placeholdr.js"></script><style>.placeholdr{color:#AAA;}</style> 
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/application.js"></script>
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/accesibility-font.js"></script>       
+        <!--script type="text/javascript" language="JavaScript" src="/General/js/jquery.js"></script-->
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/jqueryui-1.10.3.min.js"></script>
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/jquery-tipsy.js"></script>
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/jquery-ui-datepicker-en.js"></script>
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/scripts_responsive_USES.js"></script>        
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/smartpaginator.js"></script>
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/patternsJS.js"></script>
+        <script type="text/javascript" language="JavaScript" src="./PubliHoraAlumCalendario_files/sigmauses.js"></script>   
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/jquery.multiselect.min.js"></script>
+        <script type="text/javascript" src="./PubliHoraAlumCalendario_files/jquery.multiselect.filter.min.js"></script>        
+
+</body></html>
