@@ -7,5 +7,3 @@ class Classe:
         self.course = course
         self.room = room
         self.month = month
-    #def scrap_files(self):
-        
