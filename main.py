@@ -4,7 +4,7 @@ service object and outputs a list of the next 10 events on the user's calendar.
 """
 from __future__ import print_function
 
-
+import datetime
 from apiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
@@ -26,14 +26,14 @@ if not creds or creds.invalid:
 service = build('calendar', 'v3', http=creds.authorize(Http()))
 
 # Call the Calendar API
-# now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
 
-print("")
+
 # start_time = str(year + '-' + item.month + '-' + item.day[:-1] + 'T' + item.start_time[:-1] + ":00" + '+02:00')
 # end_time = str(year + '-' + item.month + '-' + item.day[:-1] + 'T' + item.end_time +  ":00" + '+02:00')
-'''event = {
-'summary': str(item.course),
-'location': str(item.room),
+event = {
+'summary': "",
+'location': "",
 'start': {
 'dateTime': start_time,
 'timeZone': 'Europe/Madrid',
@@ -42,5 +42,5 @@ print("")
 'dateTime': end_time,
 'timeZone': 'Europe/Madrid',
     },
-  }'''
-    # event = service.events().insert(calendarId='primary', body=event).execute()
+  }
+event = service.events().insert(calendarId='primary', body=event).execute()

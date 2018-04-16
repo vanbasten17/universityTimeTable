@@ -23,7 +23,7 @@ class Schedule_Scraper:
                 soup_file = BeautifulSoup(open(relative_path, "r", encoding='utf-8', errors='ignore'), "html.parser")
                 week_info = self.extract_information(soup_file)
                 self.week_info.append(week_info)
-        #return self.week_info #initial_month + list of week classes
+        # return self.week_info #initial_month + list of week classes
 
     def extract_information(self, soup_file):
         month = self.extract_month(soup_file)
@@ -62,12 +62,19 @@ class Schedule_Scraper:
 
     def extract_classes(self, file):
         classes = file.find("div", {"class": "fc-event-container"})  # find div with id = info-area
-        #print(classes.prettify())
+        # print(classes.prettify())
         for item in classes:
             aux = self.check_day(item)
             summary, start_time, end_time, group, cr_type, room = self.parse_classe(item.get_text())
+            print(summary)
+            print(start_time)
+            print(end_time)
+            print(group)
+            print(cr_type)
+            print(room)
+            print("\n\n")
 
-            #self.week_info.append(self.format_classe(classe))
+            # self.week_info.append(self.format_classe(classe))
 
     def check_day(self, item):
         aux = re.findall('(\w+)\s*: (\w+)', str(item))[2]
@@ -76,9 +83,10 @@ class Schedule_Scraper:
             return self.day_codes.get(positions)
 
     def parse_classe(self, str_classe):
-
-        if 'Holiday' in str_classe:
-            return "Holiday", "00:00:00", "00:00:00", "", "", ""
+        # if 'Holiday' or 'No classes' in str_classe:
+        #    return "Holiday / No classes", "00:00:00", "00:00:00", "", "", ""
+        if False:
+            print(" ")
         else:
             aux = str_classe.split("-")
             start_time = aux[0]
@@ -89,13 +97,11 @@ class Schedule_Scraper:
             course_info = aux[3]
             cr_type = re.search('(.*?)Classrooms', course_info).group(1).replace(" ", "")
             room = "No room assignated"
+
             if re.search('\\d+.\\d+', course_info) is not None:
                 room = re.search('\\d+.\\d+', course_info).group(0)
 
-
         return summary, start_time, end_time, group, cr_type, room
-
-
 
 
 '''
