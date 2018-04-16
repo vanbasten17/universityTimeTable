@@ -17,3 +17,4 @@ class Classe:
         print("Group: " + self.group)
         print("Type: " + self.cr_type)
         print("Building: " + self.room + "\n")
+

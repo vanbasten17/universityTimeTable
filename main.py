@@ -3,7 +3,7 @@ Shows basic usage of the Google Calendar API. Creates a Google Calendar API
 service object and outputs a list of the next 10 events on the user's calendar.
 """
 from __future__ import print_function
-
+import numpy as np
 import datetime
 from apiclient.discovery import build
 from httplib2 import Http
@@ -30,13 +30,26 @@ classes = week_info[1]
 # Call the Calendar API
 now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
 
-
-for classe in classes:
-    start_time = year + "-" + month + "-" + classe.day + "T"+classe.start_time + "+02:00"
-    end_time = year + "-" + month + "-" + classe.day + "T" + classe.end_time + "+02:00"
+i = 0
+for classe in enumerate(classes):
+    #print(classe[1])
+    if i < len(classes)-1:
+        if classes[i+1][1] < classes[i][1]:
+            month = str("0" + str(int(month)+1))
+        i += 1
+    aux = classe[1]
+    summary = aux[0]
+    day = aux[1]
+    start_time = aux[2]
+    end_time = aux[3]
+    group = aux[4]
+    cr_type = aux[5]
+    room = aux[6]
+    start_time = year + "-" + month + "-" + day + "T"+ start_time + "+02:00"
+    end_time = year + "-" + month + "-" + day + "T" + end_time + "+02:00"
     event = {
-        'summary': classe.summary + " : " + classe.cr_type + " " + classe.group,
-        'location': classe.room,
+        'summary': summary + " : " + cr_type + " " + group,
+        'location': room,
         'start': {
             'dateTime': start_time,
             'timeZone': 'Europe/Madrid',

@@ -8,7 +8,7 @@ class Schedule_Scraper:
     months = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 'June': '06',
               'July': '07', 'August': '08', 'September': '09', 'October': '10', 'November': '11', 'December': '12'}
 
-    day_codes = {'62px': '', '232px': '', '401px': '', '570px': '', '739px': ''}
+    day_codes = {}
 
     def __init__(self, schedules_directory):
         self.schedules_directory = schedules_directory
@@ -28,6 +28,7 @@ class Schedule_Scraper:
     def extract_information(self, soup_file):
         month = self.extract_month(soup_file)
         week_days = self.extract_week_days(soup_file)
+
         #print("initial month is: " + self.month)
         #print("the week_days are: " + str(week_days))
         self.extract_classes(soup_file)
@@ -53,14 +54,22 @@ class Schedule_Scraper:
                 item = "0" + item
             week_days.append(item)
         self.associate_days_with_day_codes(week_days)
+
         return week_days
 
     def associate_days_with_day_codes(self, week_days):
         self.day_codes['62px'] = str(week_days[0])  # Monday
         self.day_codes['232px'] = str(week_days[1])  # Tuesday
+        self.day_codes['230px'] = str(week_days[1])  # Tuesday
         self.day_codes['401px'] = str(week_days[2])  # Wednesday
+        self.day_codes['397px'] = str(week_days[2])  # Wednesday
         self.day_codes['570px'] = str(week_days[3])  # Thursday
+        self.day_codes['564px'] = str(week_days[3])  # Thursday
+        self.day_codes['731px'] = str(week_days[4])  # Friday
         self.day_codes['739px'] = str(week_days[4])  # Friday
+        # 54, 98, 145, 210, 263
+        # 62, 141, 219, 297, 375
+        # 62, 178, 293, 408, 523
 
     def extract_classes(self, file):
         classes = file.find("div", {"class": "fc-event-container"})  # find div with id = info-area
@@ -68,7 +77,9 @@ class Schedule_Scraper:
         for item in classes:
             day = self.check_day(item)
             summary, start_time, end_time, group, cr_type, room = self.parse_classe(item.get_text())
-            classe = Classe(summary, day, start_time, end_time, group, cr_type, room)
+            #print(summary, start_time, end_time, group, cr_type, room)
+            classe = ();
+            classe = (summary, day, start_time, end_time, group, cr_type, room);
             #    def __init__(self, summary, day, start_time, end_time, group, cr_type, room): constructor of classe
             self.week_classes.append(classe)
 
@@ -84,7 +95,6 @@ class Schedule_Scraper:
             return "Holiday", "00:00:00", "00:00:00", "", "", ""
         else:
             aux = str_classe.split("-")
-            #print(str(aux))
             start_time = aux[0].replace(" ", "") + ":00"
             end_time = re.search('(?:[01]\\d|2[0123]):(?:[012345]\\d)', aux[1]).group(0) + ":00"
             course_info = aux[2]
