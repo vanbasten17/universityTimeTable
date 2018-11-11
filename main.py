@@ -11,7 +11,6 @@ from oauth2client import file, client, tools
 from schedule_scraper import Schedule_Scraper
 import os
 
-#h
 
 # Setup the Calendar API
 SCOPES = 'https://www.googleapis.com/auth/calendar'
